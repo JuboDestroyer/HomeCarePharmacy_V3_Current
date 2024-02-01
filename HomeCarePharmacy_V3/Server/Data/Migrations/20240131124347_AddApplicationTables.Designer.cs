@@ -4,6 +4,7 @@ using HomeCarePharmacy_V3.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HomeCarePharmacy_V3.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240131124347_AddApplicationTables")]
+    partial class AddApplicationTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,26 +235,6 @@ namespace HomeCarePharmacy_V3.Server.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4b42ac7c-bb17-4a76-a8d6-493eec8156db",
-                            Email = "admin@localhost.com",
-                            EmailConfirmed = false,
-                            FirstName = "Admin",
-                            LastName = "User",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@LOCALHOST.COM",
-                            NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEP57tHh9pIQ378uwu06aKD1ni458h50zx/i5ReTx9JW0m5o1xkkaX+CPhpIXdHHtPA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e5b3efe4-bc9f-4699-9455-fcfe167dd301",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@localhost.com"
-                        });
                 });
 
             modelBuilder.Entity("HomeCarePharmacy_V3.Shared.Domain.Consultation", b =>
@@ -306,24 +289,6 @@ namespace HomeCarePharmacy_V3.Server.Data.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            CustomerId = 1,
-                            Address = "Hougang",
-                            Email = "johnPeng@gmail.com",
-                            Name = "John",
-                            PhoneNumber = 1234879
-                        },
-                        new
-                        {
-                            CustomerId = 2,
-                            Address = "Sengkang",
-                            Email = "melissaTeng@gmail.com",
-                            Name = "Melissa",
-                            PhoneNumber = 1234879
-                        });
                 });
 
             modelBuilder.Entity("HomeCarePharmacy_V3.Shared.Domain.Order", b =>
@@ -407,26 +372,6 @@ namespace HomeCarePharmacy_V3.Server.Data.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            Category = 1,
-                            Description = "Medicine for Headaches",
-                            Name = "Panadol",
-                            Price = 20.0,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            Category = 2,
-                            Description = "Medicine for Cough",
-                            Name = "Nin Jiom Pei Pa Koa",
-                            Price = 30.0,
-                            Quantity = 1
-                        });
                 });
 
             modelBuilder.Entity("HomeCarePharmacy_V3.Shared.Domain.Staff", b =>
@@ -446,20 +391,6 @@ namespace HomeCarePharmacy_V3.Server.Data.Migrations
                     b.HasKey("StaffId");
 
                     b.ToTable("Staffs");
-
-                    b.HasData(
-                        new
-                        {
-                            StaffId = 1,
-                            Gender = "Male",
-                            Name = "Johnny Boy"
-                        },
-                        new
-                        {
-                            StaffId = 2,
-                            Gender = "Female",
-                            Name = "Missy"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -487,20 +418,6 @@ namespace HomeCarePharmacy_V3.Server.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "ad2bcf0c-20db-474f-8407-5a6b159518ba",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "bd2bcf0c-20db-474f-8407-5a6b159518bb",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -590,13 +507,6 @@ namespace HomeCarePharmacy_V3.Server.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "3781efa7-66dc-47f0-860f-e506d04102e4",
-                            RoleId = "ad2bcf0c-20db-474f-8407-5a6b159518ba"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeCarePharmacy_V3.Server", "HomeCarePharmacy_V3\Server\HomeCarePharmacy_V3.Server.csproj", "{70734788-4A53-4DA5-9E6D-AD4312E16988}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCarePharmacy_V3.Server", "HomeCarePharmacy_V3\Server\HomeCarePharmacy_V3.Server.csproj", "{70734788-4A53-4DA5-9E6D-AD4312E16988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeCarePharmacy_V3.Client", "HomeCarePharmacy_V3\Client\HomeCarePharmacy_V3.Client.csproj", "{E480E966-C844-4D41-B9A0-C70700AF352A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCarePharmacy_V3.Client", "HomeCarePharmacy_V3\Client\HomeCarePharmacy_V3.Client.csproj", "{E480E966-C844-4D41-B9A0-C70700AF352A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeCarePharmacy_V3.Shared", "HomeCarePharmacy_V3\Shared\HomeCarePharmacy_V3.Shared.csproj", "{5D45C571-C7B8-48D5-8E74-EE739E2DBD02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCarePharmacy_V3.Shared", "HomeCarePharmacy_V3\Shared\HomeCarePharmacy_V3.Shared.csproj", "{5D45C571-C7B8-48D5-8E74-EE739E2DBD02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
