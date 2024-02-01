@@ -1,0 +1,72 @@
+﻿@page "/OrderIndex/"
+@using HomeCarePharmacy_Project.Client.Static
+@using HomeCarePharmacy_V3.Shared.Domain
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+
+
+<h3 class="card-title">Orders Page</h3>
+
+<br />
+@if (Orders == null)
+{
+    <div class="alert alert-info">Loading Orders...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>
+                        <a href="/makes/view/@order.OrderId" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/makes/edit/@order.OrderId" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(order.OrderId))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Order>? Orders;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Orders = await _client.GetFromJsonAsync<List<Order>>($"{Endpoints.OrdersEndpoint}");
+    }
+
+    async Task Delete(int orderId)
+    {
+        if (Orders != null)
+        {
+            var order = Orders.First(q => q.OrderId == orderId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {order.OrderId}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.OrdersEndpoint}/{orderId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}
+

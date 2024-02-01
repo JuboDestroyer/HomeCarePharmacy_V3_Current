@@ -1,0 +1,76 @@
+﻿@page "/consultationsIndex/"
+@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+@inject IJSRuntime js
+@attribute [Authorize]
+
+
+
+<h3 class="card-title">Consultations Page</h3>
+
+<br />
+@if (Consultations == null)
+{
+    <div class="alert alert-info">Loading Consultations...</div>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Staff</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var consultation in Consultations)
+            {
+                <tr>
+                    <td>@consultation.ConsultationId</td>
+                    <td>@consultation.ConsultationStatus</td>
+                    <td>@consultation.ConsultationDate.Date.ToString("dd MMMM yyyy")</td>
+                    <td>@consultation.Customer.CustomerId</td>
+                    <td>@consultation.Staff.StaffId</td>
+                    <td>
+                        <a href="/makes/view/@consultation.ConsultationId" class="btn btn-primary">
+                            <span class="oi oi-book"></span>
+                        </a>
+                        <a href="/makes/edit/@consultation.ConsultationId" class="btn btn-warning">
+                            <span class="oi oi-pencil"></span>
+                        </a>
+                        <button class="btn btn-danger" @onclick="@(()=>Delete(consultation.ConsultationId))">
+                            <span class="oi oi-delete"></span>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Consultation>? Consultations;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Consultations = await _client.GetFromJsonAsync<List<Consultation>>($"{Endpoints.ConsultationsEndpoint}");
+    }
+
+    async Task Delete(int consultationId)
+    {
+        if (Consultations != null)
+        {
+            var consultation = Consultations.First(q => q.ConsultationId == consultationId);
+            var confirm = await js.InvokeAsync<bool>("confirm", $"Do you want to delete {consultation.ConsultationId}?");
+            if (confirm)
+            {
+                await _client.DeleteAsync($"{Endpoints.ConsultationsEndpoint}/{consultationId}");
+                await OnInitializedAsync();
+            }
+        }
+    }
+}
