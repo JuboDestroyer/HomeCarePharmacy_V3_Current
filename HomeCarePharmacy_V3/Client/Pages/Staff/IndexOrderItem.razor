@@ -5,9 +5,27 @@
 @inject IJSRuntime js
 @attribute [Authorize]
 
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeCare Pharmacy SG</title>
+    <link rel="stylesheet" href="css/mainstyles.css">
+</head>
+
+
+<header>
+    <div class="main-header">
+        <img src="Icon.png" alt="HomeCare Pharmacy Logo" />
+    </div>
+</header>
 
 
 <h3 class="card-title">OrderItems Page</h3>
+
+<main>
 
 <br />
 @if (OrderItems == null)
@@ -50,6 +68,14 @@ else
         </tbody>
     </table>
 }
+
+</main>
+
+<footer>
+    &copy; 2023 Online Pharmacy. All rights reserved.
+</footer>
+
+</html>
 
 @code {
     private List<OrderItem>? OrderItems;
