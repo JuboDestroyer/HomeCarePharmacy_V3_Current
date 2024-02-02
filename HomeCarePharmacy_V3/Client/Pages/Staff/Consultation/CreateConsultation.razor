@@ -1,0 +1,36 @@
+﻿@page "/consultationsIndex/create/"
+@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+
+<h3 class="card-title">Create New Consultation</h3>
+<hr />
+<br />
+
+
+
+
+
+
+
+@code {
+    Consultation consultation = new Consultation();
+
+    private IList<Customer>? Customers;
+    private IList<Staff>? Staffs;
+    
+
+    protected async override Task OnInitializedAsync()
+    {
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+        Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
+        
+    }
+
+    private async Task Createconsultation()
+    {
+        await _client.PostAsJsonAsync(Endpoints.ConsultationsEndpoint, consultation);
+        _navManager.NavigateTo("/consultationsIndex/");
+    }
+}

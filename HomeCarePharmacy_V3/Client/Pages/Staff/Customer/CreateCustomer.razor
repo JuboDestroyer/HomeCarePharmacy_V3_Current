@@ -1,0 +1,47 @@
+﻿@page "/customerIndex/create/"
+@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+
+
+<h3 class="card-title">Create New Customer</h3>
+<hr />
+<br />
+
+<EditForm Model="@customer" OnValidSubmit="Createcustomer">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <div class=" form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@customer.Name" class="form-control" />
+            <ValidationMessage For="@(() => customer.Name)" />
+        </div>
+        <label>Email: </label>
+        <div>
+            <InputText @bind-Value="@customer.Email" class="form-control" />
+            <ValidationMessage For="@(() => customer.Email)" />
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Customer
+    </button>
+
+    <br />
+</EditForm>
+
+
+@code {
+    Customer customer = new Customer();
+
+    private async Task Createcustomer()
+    {
+        await _client.PostAsJsonAsync(Endpoints.CustomersEndpoint, customer);
+        _navManager.NavigateTo("/customer-Index/");
+    }
+}

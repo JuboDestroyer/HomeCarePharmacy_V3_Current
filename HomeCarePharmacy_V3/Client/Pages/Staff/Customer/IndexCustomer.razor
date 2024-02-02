@@ -1,6 +1,5 @@
 ﻿@page "/customerIndex/"
 @using HomeCarePharmacy_Project.Client.Static
-@using HomeCarePharmacy_V3.Shared.Domain
 @inject HttpClient _client
 @inject IJSRuntime js
 @attribute [Authorize]
@@ -8,8 +7,12 @@
 
 
 <h3 class="card-title">Customers Page</h3>
-
 <br />
+
+<a href="/customerIndex/create" class="btn btn-secondary">
+    <span class="oi oi-plus"></span>
+    Create New Customer
+</a>
 @if (Customers == null)
 {
     <div class="alert alert-info">Loading Customers...</div>
