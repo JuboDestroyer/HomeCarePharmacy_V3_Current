@@ -30,7 +30,7 @@ namespace HomeCarePharmacy_V3.Server.Controllers
         //public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         public async Task<IActionResult> GetOrders()
         {
-            var orders = await _unitOfWork.Orders.GetAll();
+            var orders = await _unitOfWork.Orders.GetAll(includes: q => q.Include(x => x.Customer).Include(x => x.Staff));
             return Ok(orders);
             //return await _context.Orders.ToListAsync();
         }

@@ -1,0 +1,22 @@
+﻿@page "/productsIndex/edit/{id:int}"
+@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditProduct" product = "product" />
+
+
+@code {
+    [Parameter] public int id { get; set; }
+    Product product = new Product();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        product= await _client.GetFromJsonAsync<Product>($"{Endpoints.ProductsEndpoint}/{id}");
+    }
+    async Task EditProduct()
+    {
+        await _client.PostAsJsonAsync($"{Endpoints.ProductsEndpoint}/{id}", product);
+        _navManager.NavigateTo("/productsIndex/");
+    }
+}

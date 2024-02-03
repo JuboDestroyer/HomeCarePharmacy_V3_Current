@@ -1,4 +1,4 @@
-﻿@page "/OrderItemItemIndex/"
+﻿@page "/OrderItemsIndex/"
 @using HomeCarePharmacy_Project.Client.Static
 @using HomeCarePharmacy_V3.Shared.Domain
 @inject HttpClient _client
@@ -27,6 +27,11 @@
 
 <main>
 
+    <a href="/OrderItemsIndex/create" class="btn btn-secondary">
+        <span class="oi oi-plus"></span>
+        Create New OrderItem
+    </a>
+
 <br />
 @if (OrderItems == null)
 {
@@ -39,8 +44,8 @@ else
             <tr>
                 <th>ID</th>
                 <th>Quantity</th>
+               
                 <th>OrderID</th>
-                <th>ProductID</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -51,7 +56,7 @@ else
                     <td>@orderitem.OrderItemId</td>
                     <td>@orderitem.Quantity</td>
                     <td>@orderitem.Order.OrderId</td>
-                    <td>@orderitem.Product.ProductId</td>
+
                     <td>
                         <a href="/makes/view/@orderitem.OrderItemId" class="btn btn-primary">
                             <span class="oi oi-book"></span>

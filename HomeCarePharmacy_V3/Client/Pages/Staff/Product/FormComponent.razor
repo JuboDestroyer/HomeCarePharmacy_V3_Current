@@ -1,0 +1,46 @@
+﻿
+
+
+
+
+<EditForm Model="@product" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <div class=" form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@product.Name" class="form-control" />
+            <ValidationMessage For="@(() => product.Name)" />
+        </div>
+        <label>Description: </label>
+        <div>
+            <InputText @bind-Value="@product.Description" class="form-control" />
+            <ValidationMessage For="@(() => product.Description)" />
+        </div>
+        <label>Price: </label>
+        <div>
+            <InputNumber @bind-Value="@product.Price" class="form-control" />
+            <ValidationMessage For="@(() => product.Price)" />
+        </div>
+        <label>Quantity: </label>
+        <div>
+            <InputNumber @bind-Value="@product.Quantity" class="form-control" />
+            <ValidationMessage For="@(() => product.Quantity)" />
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+
+    <br />
+</EditForm>
+
+@code {
+    [Parameter] public Product? product { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

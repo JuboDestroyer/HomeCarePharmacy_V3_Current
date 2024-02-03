@@ -42,9 +42,12 @@ else
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Order ID</th>
+                <th>Customer Name</th>
                 <th>Date</th>
+                <th>Staff Handling Order</th>
                 <th>Status</th>
+                <th>Staff Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -53,7 +56,9 @@ else
             {
                 <tr>
                     <td>@order.OrderId</td>
+                    <td>@order.Customer.Name</td>
                     <td>@order.OrderDate.Date.ToString("dd MMMM yyyy")</td>
+                    <td>@order.Staff.Name</td>
                     <td>@order.OrderStatus</td>
                     <td>
                         <a href="/makes/view/@order.OrderId" class="btn btn-primary">

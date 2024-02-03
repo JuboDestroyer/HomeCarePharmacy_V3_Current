@@ -55,18 +55,18 @@ else
                     <td>@product.Description</td>
                     <td>@product.Price</td>
                     <td>@product.Quantity</td>
-                  
-                    <td>
-                        <a href="/makes/view/@product.ProductId" class="btn btn-primary">
-                            <span class="oi oi-book"></span>
-                        </a>
-                        <a href="/makes/edit/@product.ProductId" class="btn btn-warning">
-                            <span class="oi oi-pencil"></span>
-                        </a>
-                        <button class="btn btn-danger" @onclick="@(()=>Delete(product.ProductId))">
-                            <span class="oi oi-delete"></span>
-                        </button>
-                    </td>
+
+                        <td>
+                            <a href="/productsIndex/view/@product.ProductId" class="btn btn-primary">
+                                <span class="oi oi-book"></span>
+                            </a>
+                            <a href="/productsIndex/edit/@product.ProductId" class="btn btn-warning">
+                                <span class="oi oi-pencil"></span>
+                            </a>
+                            <button class="btn btn-danger" @onclick="@(()=>Delete(product.ProductId))">
+                                <span class="oi oi-delete"></span>
+                            </button>
+                        </td>
                 </tr>
             }
         </tbody>
