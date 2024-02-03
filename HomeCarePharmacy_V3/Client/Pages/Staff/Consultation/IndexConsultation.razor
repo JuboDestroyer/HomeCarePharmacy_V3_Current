@@ -43,7 +43,7 @@ else
     <table class="table table-responsive">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Consultation ID</th>
                 <th>Status</th>
                 <th>Date</th>
                 <th>Customer</th>
@@ -58,8 +58,8 @@ else
                     <td>@consultation.ConsultationId</td>
                     <td>@consultation.ConsultationStatus</td>
                     <td>@consultation.ConsultationDate.Date.ToString("dd MMMM yyyy")</td>
-                    <td>@consultation.Customer.CustomerId</td>
-                    <td>@consultation.Staff.StaffId</td>
+                    <td>@consultation.Customer.Name</td>
+                    <td>@consultation.Staff.Name</td>
                     <td>
                         <a href="/makes/view/@consultation.ConsultationId" class="btn btn-primary">
                             <span class="oi oi-book"></span>

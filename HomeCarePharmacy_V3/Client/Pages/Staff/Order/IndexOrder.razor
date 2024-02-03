@@ -27,7 +27,10 @@
 
 <main>
 
-
+    <a href="/OrderIndex/create" class="btn btn-secondary">
+        <span class="oi oi-plus"></span>
+        Create New Order
+    </a>
 
 <br />
 @if (Orders == null)
@@ -50,6 +53,8 @@ else
             {
                 <tr>
                     <td>@order.OrderId</td>
+                    <td>@order.OrderDate.Date.ToString("dd MMMM yyyy")</td>
+                    <td>@order.OrderStatus</td>
                     <td>
                         <a href="/makes/view/@order.OrderId" class="btn btn-primary">
                             <span class="oi oi-book"></span>

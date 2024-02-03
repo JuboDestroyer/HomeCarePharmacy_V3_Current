@@ -51,7 +51,7 @@ namespace HomeCarePharmacy_V3.Server.Repository
             GC.SuppressFinalize(this);
         }
 
-        public async Task Save(HttpContext httpContext)
+        /*public async Task Save(HttpContext httpContext)
         {
             //To be implemented
             string user = "System";
@@ -61,6 +61,32 @@ namespace HomeCarePharmacy_V3.Server.Repository
                     q.State == EntityState.Added);
 
             
+
+            await _context.SaveChangesAsync();
+        }*/
+        public async Task Save(HttpContext httpContext)
+        {
+            // To be implemented
+            
+
+            var entries = _context.ChangeTracker.Entries()
+                .Where(q => q.State == EntityState.Modified ||
+                            q.State == EntityState.Added);
+
+            foreach (var entry in entries)
+            {
+                var entity = entry.Entity;
+
+                // Get all DateTime properties of the entity
+                var dateProperties = entity.GetType().GetProperties()
+                    .Where(p => p.PropertyType == typeof(DateTime));
+
+                foreach (var dateProperty in dateProperties)
+                {
+                    // Set each DateTime property to the current date
+                    dateProperty.SetValue(entity, DateTime.Now);
+                }
+            }
 
             await _context.SaveChangesAsync();
         }
