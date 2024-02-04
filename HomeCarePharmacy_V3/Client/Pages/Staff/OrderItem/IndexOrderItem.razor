@@ -58,10 +58,10 @@ else
                     <td>@orderitem.Order.OrderId</td>
 
                     <td>
-                        <a href="/makes/view/@orderitem.OrderItemId" class="btn btn-primary">
+                            <a href="/OrderItemsIndex/view/@orderitem.OrderItemId" class="btn btn-primary">
                             <span class="oi oi-book"></span>
                         </a>
-                        <a href="/makes/edit/@orderitem.OrderItemId" class="btn btn-warning">
+                            <a href="/OrderItemsIndex/edit/@orderitem.OrderItemId" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
                         <button class="btn btn-danger" @onclick="@(()=>Delete(orderitem.OrderItemId))">

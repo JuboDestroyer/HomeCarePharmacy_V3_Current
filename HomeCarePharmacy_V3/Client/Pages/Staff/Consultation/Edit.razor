@@ -1,0 +1,23 @@
+﻿@page "/consultationsIndex/edit/{id:int}"
+@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditConsultation" consultation="consultation" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Consultation consultation = new Consultation();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        consultation = await _client.GetFromJsonAsync<Consultation>($"{Endpoints.ConsultationsEndpoint}/{id}");
+    }
+
+    async Task EditConsultation()
+    {
+        // Optionally, you can merge properties here if needed.
+        await _client.PutAsJsonAsync($"{Endpoints.ConsultationsEndpoint}/{id}", consultation);
+        _navManager.NavigateTo("/consultationsIndex/");
+    }
+}

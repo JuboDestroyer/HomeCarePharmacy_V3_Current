@@ -1,0 +1,83 @@
+﻿@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+
+
+<EditForm Model="@consultation" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Date: </label>
+        <div>
+            <InputDate @bind-Value="@consultation.ConsultationDate" class="form-control" />
+            <ValidationMessage For="@(() => consultation.ConsultationDate)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Status: </label>
+        <div>
+            <InputText @bind-Value="@consultation.ConsultationStatus" class="form-control" />
+            <ValidationMessage For="@(() => consultation.ConsultationStatus)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Customer: </label>
+        <div>
+            <InputSelect @bind-Value="@consultation.CustomerId" class="form-control">
+                <option value="">-- Select Customer --</option>
+                @if (Customers != null)
+                {
+                    foreach (var customer in Customers)
+                    {
+                        <option value="@customer.CustomerId">@customer.Name</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => consultation.CustomerId)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Staff: </label>
+        <div>
+            <InputSelect @bind-Value="@consultation.StaffId" class="form-control">
+                <option value="">-- Select Staff --</option>
+                @if (Staffs != null)
+                {
+                    foreach (var staff in Staffs)
+                    {
+                        <option value="@staff.StaffId">@staff.Name</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => consultation.StaffId)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Add New Consultation
+    </button>
+</EditForm>
+
+@code {
+    [Parameter] public bool Disabled { get; set; } = false;
+    [Parameter] public Consultation? consultation { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Customer>? Customers;
+    private IList<Staff>? Staffs;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Customers = await _client.GetFromJsonAsync<List<Customer>>($"{Endpoints.CustomersEndpoint}");
+        Staffs = await _client.GetFromJsonAsync<List<Staff>>($"{Endpoints.StaffsEndpoint}");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await OnValidSubmit.InvokeAsync(consultation);
+    }
+}

@@ -1,0 +1,24 @@
+﻿@page "/customerIndex/edit/{id:int}"
+@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditCustomer" customer="customer" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Customer customer = new Customer();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        customer = await _client.GetFromJsonAsync<Customer>($"{Endpoints.CustomersEndpoint}/{id}");
+    }
+
+    async Task EditCustomer(Customer updatedCustomer)
+    {
+        // Optionally, you can merge properties here if needed.
+        await _client.PutAsJsonAsync($"{Endpoints.CustomersEndpoint}/{id}", updatedCustomer);
+        _navManager.NavigateTo("/customerIndex/");
+    }
+}
+

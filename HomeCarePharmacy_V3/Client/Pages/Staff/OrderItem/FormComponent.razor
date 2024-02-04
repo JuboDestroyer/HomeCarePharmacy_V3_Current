@@ -1,0 +1,78 @@
+﻿@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<EditForm Model="@orderitem" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>Quantity: </label>
+        <div>
+            <InputNumber @bind-Value="orderitem.Quantity" class="form-control" />
+            <ValidationMessage For="@(() => orderitem.Quantity)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Order: </label>
+        <div>
+            <InputSelect @bind-Value="orderitem.OrderId" class="form-control">
+                <option value="">-- Select Order --</option>
+                @if (Orders != null)
+                {
+                    foreach (var order in Orders)
+                    {
+                        <option value="@order.OrderId">@order.Customer.Name</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => orderitem.OrderId)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Product: </label>
+        <div>
+            <InputSelect @bind-Value="orderitem.ProductId" class="form-control">
+                <option value="">-- Select Product --</option>
+                @if (Products != null)
+                {
+                    foreach (var product in Products)
+                    {
+                        <option value="@product.ProductId">@product.Name</option>
+                    }
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => orderitem.ProductId)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+</EditForm>
+
+
+
+@code {
+    
+   
+    [Parameter] public OrderItem? orderitem { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private IList<Order>? Orders;
+    private IList<Product>? Products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Orders = await _client.GetFromJsonAsync<List<Order>>($"{Endpoints.OrdersEndpoint}");
+        Products = await _client.GetFromJsonAsync<List<Product>>($"{Endpoints.ProductsEndpoint}");
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await OnValidSubmit.InvokeAsync(orderitem);
+    }
+}

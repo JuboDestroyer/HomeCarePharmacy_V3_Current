@@ -1,0 +1,36 @@
+﻿<EditForm Model="@customer" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <div class=" form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@customer.Name" class="form-control" />
+            <ValidationMessage For="@(() => customer.Name)" />
+        </div>
+        <label>Email: </label>
+        <div>
+            <InputText @bind-Value="@customer.Email" class="form-control" />
+            <ValidationMessage For="@(() => customer.Email)" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-block">
+        Create Customer
+    </button>
+
+    <br />
+</EditForm>
+
+@code {
+    [Parameter] public Customer ? customer { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback<Customer> OnValidSubmit { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+    
+        await OnValidSubmit.InvokeAsync(customer);
+    }
+}

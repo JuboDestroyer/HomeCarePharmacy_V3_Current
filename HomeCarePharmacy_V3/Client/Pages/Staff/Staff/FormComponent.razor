@@ -1,0 +1,38 @@
+﻿<EditForm Model="@staff" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <div class=" form-group">
+        <label>Name: </label>
+        <div>
+            <InputText @bind-Value="@staff.Name" class="form-control" />
+            <ValidationMessage For="@(() => staff.Name)" />
+        </div>
+        <label>Gender: </label>
+        <div>
+            <InputText @bind-Value="@staff.Gender" class="form-control" />
+            <ValidationMessage For="@(() => staff.Gender)" />
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-success btn-block">
+        @ButtonText
+    </button>
+
+    <br />
+</EditForm>
+
+
+@code {
+    [Parameter] public Staff? staff { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback<Staff> OnValidSubmit { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+        // Invoke the callback with the updated product
+        await OnValidSubmit.InvokeAsync(staff);
+    }
+}

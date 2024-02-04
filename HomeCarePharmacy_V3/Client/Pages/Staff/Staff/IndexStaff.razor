@@ -54,10 +54,10 @@ else
                     <td>@staff.Name</td>
                     <td>@staff.Gender</td>
                     <td>
-                        <a href="/makes/view/@staff.StaffId" class="btn btn-primary">
+                            <a href="/staffIndex/view/@staff.StaffId" class="btn btn-primary">
                             <span class="oi oi-book"></span>
                         </a>
-                        <a href="/makes/edit/@staff.StaffId" class="btn btn-warning">
+                            <a href="/staffIndex/edit/@staff.StaffId" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
                         <button class="btn btn-danger" @onclick="@(()=>Delete(staff.StaffId))">

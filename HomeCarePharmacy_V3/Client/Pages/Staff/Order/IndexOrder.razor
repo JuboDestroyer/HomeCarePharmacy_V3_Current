@@ -61,10 +61,10 @@ else
                     <td>@order.Staff.Name</td>
                     <td>@order.OrderStatus</td>
                     <td>
-                        <a href="/makes/view/@order.OrderId" class="btn btn-primary">
+                            <a href="/OrderIndex/view/@order.OrderId" class="btn btn-primary">
                             <span class="oi oi-book"></span>
                         </a>
-                        <a href="/makes/edit/@order.OrderId" class="btn btn-warning">
+                            <a href="/OrderIndex/edit/@order.OrderId" class="btn btn-warning">
                             <span class="oi oi-pencil"></span>
                         </a>
                         <button class="btn btn-danger" @onclick="@(()=>Delete(order.OrderId))">

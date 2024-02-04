@@ -1,0 +1,24 @@
+﻿@page "/staffIndex/edit/{id:int}"
+@using HomeCarePharmacy_Project.Client.Static
+@inject HttpClient _client
+@inject NavigationManager _navManager
+
+<FormComponent ButtonText="Update" OnValidSubmit="EditStaff" staff="staff" />
+
+@code {
+    [Parameter] public int id { get; set; }
+    Staff staff = new Staff();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        staff = await _client.GetFromJsonAsync<Staff>($"{Endpoints.StaffsEndpoint}/{id}");
+    }
+
+    async Task EditStaff(Staff updatedStaff)
+    {
+        // Optionally, you can merge properties here if needed.
+        await _client.PutAsJsonAsync($"{Endpoints.StaffsEndpoint}/{id}", updatedStaff);
+        _navManager.NavigateTo("/staffIndex/");
+    }
+}
+

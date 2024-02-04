@@ -3,8 +3,7 @@
 @inject HttpClient _client
 @inject NavigationManager _navManager
 
-<FormComponent ButtonText="Update" OnValidSubmit="EditProduct" product = "product" />
-
+<FormComponent ButtonText="Update" OnValidSubmit="EditProduct" product="product" />
 
 @code {
     [Parameter] public int id { get; set; }
@@ -12,11 +11,12 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        product= await _client.GetFromJsonAsync<Product>($"{Endpoints.ProductsEndpoint}/{id}");
+        product = await _client.GetFromJsonAsync<Product>($"{Endpoints.ProductsEndpoint}/{id}");
     }
-    async Task EditProduct()
+
+    async Task EditProduct(Product updatedProduct)
     {
-        await _client.PostAsJsonAsync($"{Endpoints.ProductsEndpoint}/{id}", product);
+        await _client.PutAsJsonAsync($"{Endpoints.ProductsEndpoint}/{id}", updatedProduct);
         _navManager.NavigateTo("/productsIndex/");
     }
 }

@@ -3,12 +3,11 @@
 
 
 
-<EditForm Model="@product" OnValidSubmit="@OnValidSubmit">
+<EditForm Model="@product" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-
-    <div class=" form-group">
+    <div class="form-group">
         <label>Name: </label>
         <div>
             <InputText @bind-Value="@product.Name" class="form-control" />
@@ -31,7 +30,6 @@
         </div>
     </div>
 
-
     <button type="submit" class="btn btn-success btn-block">
         @ButtonText
     </button>
@@ -42,5 +40,11 @@
 @code {
     [Parameter] public Product? product { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
-    [Parameter] public EventCallback OnValidSubmit { get; set; }
+    [Parameter] public EventCallback<Product> OnValidSubmit { get; set; }
+
+    private async Task HandleValidSubmit()
+    {
+        // Invoke the callback with the updated product
+        await OnValidSubmit.InvokeAsync(product);
+    }
 }
