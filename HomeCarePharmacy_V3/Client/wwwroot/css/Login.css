@@ -1,0 +1,12 @@
+﻿
+background {
+    background-image: url('C:\Users\qayyu\Source\Repos\HomeCarePharmacy_V3_Current1\HomeCarePharmacy_V3\Client\wwwroot\Login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh; /* Adjust the height as needed */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
