@@ -21,6 +21,17 @@ namespace HomeCarePharmacy_V3.Server.Configurations.Entities
                 UserName = "admin@localhost.com",
                 NormalizedUserName = "ADMIN@LOCALHOST.COM",
                 PasswordHash = hasher.HashPassword(null, "P@ssword1")
+            },
+            new ApplicationUser
+            {
+                Id = "e0329061-f159-44eb-9352-231f75bf27a6",
+                Email = "user@blazor.com",
+                NormalizedEmail = "USER@LOCALHOST.COM",
+                FirstName = "User",
+                LastName = "User",
+                UserName = "user@blazor.com",
+                NormalizedUserName = "USER@LOCALHOST.COM",
+                PasswordHash = hasher.HashPassword(null, "P@ssword1")
             }
             );
         }
