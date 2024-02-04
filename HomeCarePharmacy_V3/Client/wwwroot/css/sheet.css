@@ -1,0 +1,77 @@
+﻿body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #3498db;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,113,1) 35%, rgba(20,178,231,1) 89%, rgba(0,212,255,1) 100%);
+    padding: 20px;
+}
+
+h2, h3 {
+    color: #3498db;
+}
+
+section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    border: 1px solid #ddd;
+}
+.img-template {
+    width: 200px;
+    height: 130px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    border: 1px solid #ddd; /* Added border */
+    border-radius: 8px; /* Added border radius */
+}
+
+    .img-template img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 6px; /* Added border radius for image */
+    }
+
+.name-template {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    margin: 0;
+    border-top: 1px solid #ddd; /* Added border top */
+    border-radius: 0 0 8px 8px; /* Added border radius for the bottom */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+    ul li {
+        margin-bottom: 15px;
+    }
+
+footer {
+    background-color: #800000;
+    color: #ecf0f1;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
