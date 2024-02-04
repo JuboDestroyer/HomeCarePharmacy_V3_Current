@@ -1,4 +1,4 @@
-﻿@page "/products/view/{id:int}"
+﻿@page "/OrderIndex/view/{id:int}"
 @inject HttpClient _client
 @inject NavigationManager _navManager
 @using HomeCarePharmacy_Project.Client.Static;
@@ -6,14 +6,14 @@
 
 <h3>View</h3>
 
-<FormComponent product="product" Disabled="true" />
+<FormComponent order="order" Disabled="true" />
 
 @code {
     [Parameter] public int id { get; set; }
-    Product? product = new Product();
+    Order? order = new Order();
 
     protected async override Task OnParametersSetAsync()
     {
-        product = await _client.GetFromJsonAsync<Product>($"{Endpoints.ProductsEndpoint}/{id}");
+        order = await _client.GetFromJsonAsync<Order>($"{Endpoints.OrdersEndpoint}/{id}");
     }
 }   

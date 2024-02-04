@@ -14,6 +14,7 @@ namespace HomeCarePharmacy_V3.Server.Configurations.Entities
                Price = 20,
                ProductId = 1,
                Name = "Panadol",
+               ProductImage = "Image/aboutus.jpg",
                Description = "Medicine for Headaches",
                Quantity = 1,
                Category = 1
@@ -23,6 +24,7 @@ namespace HomeCarePharmacy_V3.Server.Configurations.Entities
                 Price = 30,
                 ProductId = 2,
                 Name = "Nin Jiom Pei Pa Koa",
+                ProductImage = "Image/aboutus.jpg",
                 Description = "Medicine for Cough",
                 Quantity = 1,
                 Category = 2
